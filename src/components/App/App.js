@@ -30,6 +30,7 @@ class App extends Component {
         })
     })
     .then(res => res.json())
+    .then(newPost => console.log('new trick,', newPost))
 }
 deleteTrickFromApi = (id) => {
   fetch(`http://localhost:3001/api/v1/tricks/${id}`, {

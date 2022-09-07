@@ -8,7 +8,7 @@ const TricksContainer = ({tricks, deleteTrick}) => {
         return <Tricks key ={id} id={id} name={name} obstacle={obstacle} stance={stance} tutorial={tutorial} deleteTrick={deleteTrick}/>
     })
     return (
-        <div>
+        <div className="trick-container">
             {trickCard}
         </div>
     )

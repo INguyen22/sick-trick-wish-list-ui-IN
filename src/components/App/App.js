@@ -21,11 +21,15 @@ class App extends Component {
   componentDidMount = () => {
     this.fetchTricks()
   }
+  addTrick = (newTrick) => {
+    this.setState({tricks: [...this.state.tricks, newTrick]})
+    console.log('updated state?', this.state.tricks)
+  }
   render() {
     return (
       <div className="App">
         <h1>Sick Trick Wish List</h1>
-        <Form />
+        <Form addTrick={this.addTrick}/>
         <TricksContainer tricks={this.state.tricks}/>
       </div>
     );

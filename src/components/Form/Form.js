@@ -6,7 +6,7 @@ class Form extends Component {
         super()
         this.state = {
             stance: '',
-            trickName: '',
+            name: '',
             obstacle: '',
             tutorial: ''
         }
@@ -15,21 +15,39 @@ class Form extends Component {
         const {name, value} = event.target
         this.setState({ [name]: value})
     }
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const newTrick = {
+            id: Date.now(),
+            ...this.state
+        }
+        this.props.addTrick(newTrick)
+        this.clearInput()
+    }
+    clearInput = () => {
+        this.setState({
+            stance: '',
+            name: '',
+            obstacle: '',
+            tutorial: ''
+        })
+    }
     render() {
         return (
-        <form>
+        <form onSubmit={this.handleSubmit}>
             <select 
                 name="stance"
                 value={this.state.stance}
                 placeholder="Choose your stance"
                 onChange={this.handleChange}
             >
-                <option value="regular">Regular</option>
-                <option value="switch">Switch</option>
+                <option disabled value="">Choose your stance</option>
+                <option value="Regular">Regular</option>
+                <option value="Switch">Switch</option>
             </select>
             <input 
-                name="trickName"
-                value={this.state.trickName}
+                name="name"
+                value={this.state.name}
                 placeholder="Trick Name"
                 onChange={this.handleChange}
             />
@@ -39,6 +57,7 @@ class Form extends Component {
                 placeholder="Choose your stance"
                 onChange={this.handleChange}
             >
+                <option disabled value="">Obstacle</option>
                 <option value="Flatground">Flatground</option>
                 <option value="Ledge">Ledge</option>
                 <option value="Rail">Rail</option>

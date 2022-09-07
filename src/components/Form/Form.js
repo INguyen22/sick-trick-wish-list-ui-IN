@@ -46,6 +46,7 @@ class Form extends Component {
                 <option value="Switch">Switch</option>
             </select>
             <input 
+                type="text"
                 name="name"
                 value={this.state.name}
                 placeholder="Trick Name"
@@ -66,6 +67,7 @@ class Form extends Component {
                 
             </select>
             <input 
+                type="text"
                 name="tutorial"
                 value={this.state.tutorial}
                 placeholder="Link to tutorial"

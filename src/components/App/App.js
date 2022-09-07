@@ -31,6 +31,13 @@ class App extends Component {
     })
     .then(res => res.json())
 }
+deleteTrickFromApi = (id) => {
+  fetch(`http://localhost:3001/api/v1/tricks/${id}`, {
+        method:'DELETE',
+        headers: {"Content-Type": "application/json"},
+    })
+  .then(res => res.json())
+}
   componentDidMount = () => {
     this.fetchTricks()
   }
@@ -40,12 +47,17 @@ class App extends Component {
     console.log('new trick', newTrick)
     this.addTrickPost(newTrick)
   }
+  deleteTrick = (id) => {
+    const filterTricks = this.state.tricks.filter(trick => trick.id !== id)
+    this.setState({tricks: filterTricks})
+    this.deleteTrickFromApi(id)
+  }
   render() {
     return (
       <div className="App">
         <h1>Sick Trick Wish List</h1>
         <Form addTrick={this.addTrick}/>
-        <TricksContainer tricks={this.state.tricks}/>
+        <TricksContainer tricks={this.state.tricks} deleteTrick={this.deleteTrick}/>
       </div>
     );
   }

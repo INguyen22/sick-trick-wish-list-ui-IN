@@ -24,7 +24,21 @@ describe('App', () => {
     .get('input[type="text"]').first().type('cat flip').should('have.value', 'cat flip')
     .get('select[name="obstacle"]').select('Pool').should('have.value', 'Pool')
     .get('input[type="text"]').last().type('link to cat flip').should('have.value', 'link to cat flip')
-    .get('button').click()
+    .get('.send-button').click()
+    .intercept('POST', "http://localhost:3001/api/v1/tricks", {
+        statusCode: 201,
+        body: {
+          stance: "Regular",
+          name: "cat flip",
+          obstacle: "pool",
+          tutorial: "link to cat flip"
+        }
+      })
     .get('.trick-card').last().should('have.class', 'trick-card').contains('link to cat flip')
+  })
+  it('should be able to delete a trick', () => {
+   cy.get('.delete-button').first().click()
+    .intercept('DELETE', "http://localhost:3001/api/v1/tricks/1")
+    .get('.trick-card').first().should('have.class', 'trick-card').contains('https://www.youtube.com/watch?v=9N9swrZU1HA')
   })
 })

@@ -73,7 +73,7 @@ class Form extends Component {
                 placeholder="Link to tutorial"
                 onChange={this.handleChange}
             />
-            <button>Send it!!!</button>
+            <button className="send-button">Send it!!!</button>
         </form>
         )
     }

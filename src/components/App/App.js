@@ -18,12 +18,27 @@ class App extends Component {
       this.setState({tricks: data})
     })
   }
+  addTrickPost = (newTrick) => {
+    fetch("http://localhost:3001/api/v1/tricks", {
+        method:'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ 
+            stance: newTrick.stance, 
+            name: newTrick.name,
+            obstacle: newTrick.obstacle,
+            tutorial: newTrick.tutorial
+        })
+    })
+    .then(res => res.json())
+}
   componentDidMount = () => {
     this.fetchTricks()
   }
   addTrick = (newTrick) => {
     this.setState({tricks: [...this.state.tricks, newTrick]})
     console.log('updated state?', this.state.tricks)
+    console.log('new trick', newTrick)
+    this.addTrickPost(newTrick)
   }
   render() {
     return (
